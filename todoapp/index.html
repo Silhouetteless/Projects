@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--<meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+    <link rel="stylesheet" href="style.css">
+    <!--path for using fontawesome-->
+    <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"
+    data-auto-a11y="true"></script>
+</head>
+<body>
+    <div class="wrapper">
+        <header>Todo App</header>
+        <div class ="inputField">
+            <input type="text" placeholder="Add your new todo">
+            <button><i class="fas fa-plus"></i></button>
+        </div>
+        <ul class="todoList">
+            <!--
+                examples:
+                <li>Check background to make it look normal<span><i class="fas fa-trash"></i></span></li>
+                <li>Check active button<span><i class="fas fa-trash"></i></span></li>
+                <li>Create a video for Youtube<span><i class="fas fa-trash"></i></span></li>
+                <li>Create a new portfolio site<span><i class="fas fa-trash"></i></span></li>
+            -->
+        </ul>
+        <div class="footer">
+            <span>You have <span class="pendingNum"></span> pending tasks</span>
+            <button>Clear All</button>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="main.js"></script>
+    
+</body>
+</html>
