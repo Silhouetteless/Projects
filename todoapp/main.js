@@ -17,6 +17,22 @@ inputBox.onkeyup = ()=> {
 //calling showTask function to have the changes saved after refreshing the page
 showTasks();
 
+//storing deleted showTasks
+function storeDeleted(listArr,index) {
+    let getLocalStorageUndo = localStorage.getItem("New Removed");
+    if(getLocalStorageUndo == null) {
+        removedTasks = [];
+    } else {
+        removedTasks = JSON.parse(getLocalStorageUndo);
+    }
+    removedTasks.push(listArr[index]);
+    localStorage.setItem("New Removed", JSON.stringify(removedTasks));
+    
+    showTasks();
+
+    
+}
+
 //after clicking add button:
 addBtn.onclick = ()=> {
     let userData = inputBox.value;
@@ -73,18 +89,7 @@ function showTasks() {
     inputBox.value = "";
 }
 
-//storing deleted showTasks
-function storeDeleted(listArr,index) {
-    let getLocalStorageUndo = localStorage.getItem("New Removed");
-    if(getLocalStorageUndo == null) {
-        removedTasks = [];
-    } else {
-        removedTasks = JSON.parse(getLocalStorageUndo);
-    }
-    removedTasks.push(listArr[index]);
-    localStorage.setItem("New Removed", JSON.stringify(removedTasks));
-    showTasks();
-}
+
 
 //deleting tasks
 function deleteTask(index) {
@@ -96,6 +101,7 @@ function deleteTask(index) {
    //updating the list
     localStorage.setItem("New Todo", JSON.stringify(listArr));
     showTasks();
+    undoBtn.classList.add("active");
 }
 
 
@@ -106,4 +112,37 @@ deleteAllBtn.onclick = () => {
     //updating the list
     localStorage.setItem("New Todo", JSON.stringify(listArr));
     showTasks();
+}
+
+//undo button 
+
+undoBtn.onclick = () => {
+    let getLocalStorage = localStorage.getItem("New Todo");
+    if(getLocalStorage == null) {
+        listArr = [];
+    } else {
+        listArr = JSON.parse(getLocalStorage);
+    }
+    let getLocalStorageUndo = localStorage.getItem("New Removed");
+    if(getLocalStorageUndo == null) {
+        removedTasks = [];
+    } else {
+        removedTasks = JSON.parse(getLocalStorageUndo);
+    }
+
+    listArr.push(...removedTasks);
+    let newLiTag = "";
+    listArr.forEach((element, index) => {
+        newLiTag += `<li>${element}<span onclick = "deleteTask(${index})"><i class="fas fa-trash"></i></span></li>`;
+    });
+    //adding new li tag inside ul tag
+    todoList.innerHTML = newLiTag;
+     
+    localStorage.setItem("New Todo", JSON.stringify(listArr));
+    removedTasks = [];
+    localStorage.setItem("New Removed", JSON.stringify(removedTasks));
+    
+    showTasks();
+
+    
 }
