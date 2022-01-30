@@ -56,6 +56,13 @@ function showTasks() {
         deleteAllBtn.classList.remove("active");
     }
 
+    //activating undo button
+    if(listArr.length > 0) {
+        undoBtn.classList.add("active");
+    } else {
+        undoBtn.classList.remove("active");
+    }
+
     let newLiTag = "";
     listArr.forEach((element, index) => {
         newLiTag += `<li>${element}<span onclick = "deleteTask(${index})"><i class="fas fa-trash"></i></span></li>`;
@@ -66,10 +73,24 @@ function showTasks() {
     inputBox.value = "";
 }
 
+//storing deleted showTasks
+function storeDeleted(listArr,index) {
+    let getLocalStorageUndo = localStorage.getItem("New Removed");
+    if(getLocalStorageUndo == null) {
+        removedTasks = [];
+    } else {
+        removedTasks = JSON.parse(getLocalStorageUndo);
+    }
+    removedTasks.push(listArr[index]);
+    localStorage.setItem("New Removed", JSON.stringify(removedTasks));
+    showTasks();
+}
+
 //deleting tasks
 function deleteTask(index) {
    let getLocalStorage = localStorage.getItem("New Todo");
    listArr = JSON.parse(getLocalStorage);
+   storeDeleted(listArr,index);
    //deleting a particular li index
    listArr.splice(index, 1);
    //updating the list
