@@ -82,17 +82,20 @@ body{
 }
 
 .todoList li {
+    color: rgb(29, 9, 0);
     list-style: none;
-    height: 45px;
-    line-height: 45px;
+    min-height: 45px;
+    height: auto;
+    line-height: 1.1em;
     position: relative;
     background: rgba(192, 153, 129, 0.7);
     border-radius: 3px;
     margin-bottom: 8px;
-    padding: 0px 15px; /*maybe 10px 15px*/
+    padding: 10px 15px; /*maybe 10px 15px*/
     cursor: default;
     overflow: hidden;
     word-wrap: break-word;
+    
 }
 
 .todoList li span {
@@ -104,8 +107,12 @@ body{
     text-align: center;
     border-radius: 0 3px 3px 0;
     cursor: pointer;
-    padding: 10px 15px;
+    padding: 100px 15px;
+    overflow: hidden;
     transition: all 0.3s ease;
+    top: 50%;
+    transform: translateY(-50%);
+
 }
 
 .todoList li:hover span{
@@ -120,7 +127,7 @@ body{
     justify-content: space-between;
 }
 
-.footer button {
+.footer button.clearAllBtn {
     border: none;
     outline: none;
     background: #5a382b;
@@ -129,17 +136,37 @@ body{
     cursor: pointer;
     border-radius: 3px;
     padding: 6px 10px;
-    opacity: 0.6;
+    opacity: 0;
     pointer-events: none;
     transition: all 0.3s ease;
 }
 
-.footer button.active {
+.footer button.clearAllBtn.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.footer button.undoBtn {
+    border: none;
+    outline: none;
+    background: #5a382b;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 3px;
+    padding: 6px 10px;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+.footer button.undoBtn.active {
     opacity: 1;
     pointer-events: auto;
 }
 
 .inputField button:hover,
-.footer button:hover{
+.footer button.clearAllBtn:hover
+.footer button.undoBtn:hover {
   background: #856047;
 }
