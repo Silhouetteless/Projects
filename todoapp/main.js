@@ -95,6 +95,7 @@ function showTasks() {
 function deleteTask(index) {
    let getLocalStorage = localStorage.getItem("New Todo");
    listArr = JSON.parse(getLocalStorage);
+   //storing deletedTask
    storeDeleted(listArr,index);
    //deleting a particular li index
    listArr.splice(index, 1);
@@ -130,7 +131,7 @@ undoBtn.onclick = () => {
         removedTasks = JSON.parse(getLocalStorageUndo);
     }
 
-    listArr.push(...removedTasks);
+    listArr.push(removedTasks.at(-1));
     let newLiTag = "";
     listArr.forEach((element, index) => {
         newLiTag += `<li>${element}<span onclick = "deleteTask(${index})"><i class="fas fa-trash"></i></span></li>`;
@@ -139,7 +140,7 @@ undoBtn.onclick = () => {
     todoList.innerHTML = newLiTag;
      
     localStorage.setItem("New Todo", JSON.stringify(listArr));
-    removedTasks = [];
+    removedTasks.pop();
     localStorage.setItem("New Removed", JSON.stringify(removedTasks));
     
     showTasks();
