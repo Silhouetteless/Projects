@@ -23,7 +23,7 @@ function passwordToogle() {
     if (pass.type === "password") {
       pass.type = "text";
     } else {
-      password.type = "password";
+      pass.type = "password";
     }
   }
 
