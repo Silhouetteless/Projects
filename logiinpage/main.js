@@ -2,14 +2,15 @@
 consider using getElementById/getElementsByClassName
 */
 
-const loginForm = document.querySelector(".loginForm .loginFormEach");
+const loginForm = document.querySelector(".loginForm");
+const loginFormEach = document.querySelector(".loginForm .loginFormEach");
 const loginBtn = document.querySelector(".loginForm .loginBtnField .loginFormSubmit");
-const loginErrorMsg = document.querySelector(".loginErrorMsg");
+const loginErrorMsg = document.querySelector("#loginErrorMsg");
 
 //activating login button
-loginForm.onkeyup = ()=> {
+loginFormEach.onkeyup = ()=> {
     //users value:
-    let userData = loginForm.value;
+    let userData = loginFormEach.value;
     if(userData.trim() != 0) { //if user values aren't only spaces
         loginBtn.classList.add("active");/*from inputField button.active*/ 
     } else {
@@ -33,8 +34,8 @@ function passwordToogle() {
 loginBtn.addEventListener("click", (e) => {
     e.preventDefault(); //preventing submitting the form
     //validating data
-    const username = loginForm.username.value;
-    const password = loginForm.password.value;
+    let username = loginForm.username.value;
+    let password = loginForm.password.value;
 
     if (username === "user" && password === "web_dev") {
         alert("You have successfully logged in.");
