@@ -21,8 +21,11 @@
         <form class="loginForm">
             <input type="text" name="username" class="loginFormEach" id="usernameField" placeholder="Username">
             <input type="password" name="password" class="loginFormEach" id="passwordField" placeholder="Password">
+            <div class="showPasswordField">
+                <input id="showPassword" type="checkbox" onclick="passwordToogle()"><p id="showPassText">Show Password</p>
+            </div>
             <div class="loginBtnField" >
-                <button id="loginFormSubmit"><i class="fas fa-sign-in-alt"></i></button>
+                <button type="submit" class="loginFormSubmit"><i class="fas fa-sign-in-alt"></i></button>
             </div>
         </form>
 
