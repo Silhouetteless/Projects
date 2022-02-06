@@ -83,7 +83,7 @@ function showTasks() {
 
     let newLiTag = "";
     listArr.forEach((element, index) => {
-        newLiTag += `<li class="levelOne">${element}<span class="dropIcon" onclick = "dropdown(${index})"><i class="fas fa-plus-circle"></i></span><span class="deleteIcon" onclick = "deleteTask(${index})"><i class="fas fa-trash"></i></span></li>`;
+        newLiTag += `<li id="levelOne">${element}<span class="dropIcon" onclick = "dropdown(${index})"><i class="fas fa-plus-circle"></i></span><span class="deleteIcon" onclick = "deleteTask(${index})"><i class="fas fa-trash"></i></span></li>`;
     });
     //adding new li tag inside ul tag
     todoList.innerHTML = newLiTag;
@@ -138,7 +138,7 @@ undoBtn.onclick = () => {
     listArr.push(removedTasks.at(-1));
     let newLiTag = "";
     listArr.forEach((element, index) => {
-        newLiTag += `<li class="levelOne">${element}<span class="dropIcon" onclick = "dropdown(${index})"><i class="fas fa-plus-circle"></i></span><span class="deleteIcon" onclick = "deleteTask(${index})"><i class="fas fa-trash"></i></span></li>`;
+        newLiTag += `<li id="levelOne">${element}<span class="dropIcon" onclick = "dropdown(${index})"><i class="fas fa-plus-circle"></i></span><span class="deleteIcon" onclick = "deleteTask(${index})"><i class="fas fa-trash"></i></span></li>`;
     });
     //adding new li tag inside ul tag
     todoList.innerHTML = newLiTag;
@@ -172,13 +172,13 @@ function dropdown(index) {
 
         
 
-        showContent();
+        showContent(index);
         
         contentArr.push(newContent);
         localStorage.setItem("New Content", JSON.stringify(contentArr));
 }
 
-function showContent() {
+function showContent(index) {
         let getLocalStorage = localStorage.getItem("New Todo");
         if(getLocalStorage == null) {
             listArr = [];
@@ -192,11 +192,16 @@ function showContent() {
             contentArr = JSON.parse(getLocalStorageContent);
         }  
 
-        let newContent = "";
-        contentArr.forEach((element) => {
-            newContent += `<li class="levelTwo" contenteditable="true">${element}</li>`;
-        });
-        todoList.innerHTML = newContent;
+        var newContent = document.createElement('div');
+        var li = document.getElementById(levelOne);
+        newContent.innerHTML = `<li class="levelTwo" contenteditable="true">Please edit this content</li>`
+        li.append(newContent);
+
+        // let newContent = "";
+        // contentArr.forEach((element) => {
+        //     newContent += `<li class="levelTwo" contenteditable="true">${element}</li>`;
+        // });
+        // todoList.innerHTML = newContent;
 }
         
     
